@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,12 +11,32 @@ public class ShoppingCartController {
   // Store carts in memory (in real app, this would be a database)
   private Map<String, Map<String, Object>> carts = new HashMap<>();
 
+  @Getter
+  @Setter
+  public class AddItemRequestDTO {
+    private String cartId;
+    private String itemName;
+    private double price;
+    private int quantity;
+  }
+
+  private double calculateTotal(Map<String, Object> cart) {
+    double total = 0;
+    for (String key : cart.keySet()) {
+      String[] parts = key.split("_");
+      double itemPrice = Double.parseDouble(parts[1]);
+      int itemQty = (int) cart.get(key);
+      total += itemPrice * itemQty;
+    }
+    return total;
+  }
+
   @PostMapping("/addItem")
-  public String addItem(
-      @RequestParam("cartId") String cartId,
-      @RequestParam("itemName") String itemName,
-      @RequestParam("price") double price,
-      @RequestParam("quantity") int quantity) {
+  public String addItem(@RequestBody AddItemRequestDTO request) {
+    String cartId = request.getCartId();
+    String itemName = request.getItemName();
+    double price = request.getPrice();
+    int quantity = request.getQuantity();
 
     // Get or create cart
     Map<String, Object> cart = carts.get(cartId);
@@ -34,13 +56,7 @@ public class ShoppingCartController {
     }
 
     // Calculate total
-    double total = 0;
-    for (String key : cart.keySet()) {
-      String[] parts = key.split("_");
-      double itemPrice = Double.parseDouble(parts[1]);
-      int itemQty = (int) cart.get(key);
-      total = total + (itemPrice * itemQty);
-    }
+    double total = calculateTotal(cart);
 
     System.out.println("Cart " + cartId + " total: " + total);
 
@@ -56,13 +72,7 @@ public class ShoppingCartController {
     }
 
     // Calculate total
-    double total = 0;
-    for (String key : cart.keySet()) {
-      String[] parts = key.split("_");
-      double itemPrice = Double.parseDouble(parts[1]);
-      int itemQty = (int) cart.get(key);
-      total = total + (itemPrice * itemQty);
-    }
+    double total = calculateTotal(cart);
 
     return "Total: " + total;
   }
