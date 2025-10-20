@@ -39,10 +39,5 @@ After reviewing the exercise instructions, I examined the code for any redundant
 
 ---
 
-## Library Usage
-Lombok was used to generate getter and setter methods automatically with @Getter and @Setter, helping reduce boilerplate code.
-
----
-
 ## Summary
 The refactored code is **cleaner, easier to read, and more maintainable**, while still performing the same business operations as the original version: adding items to a shopping cart and calculating totals.
