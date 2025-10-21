@@ -18,8 +18,8 @@ After reviewing the exercise instructions, I examined the code for any redundant
 ## Key Improvements
 
 ### 1. Use of a DTO (`AddItemRequestDTO`)
-- Consolidates all request parameters for adding an item into a single object.
-- Improves method readability and maintainability.
+- Combines all the request parameters for adding an item into a single object.
+- Makes the addItem() method easier to read and maintain.
 - Makes it easier to extend in the future if new fields (e.g., discounts, categories) are added.
 
 ### 2. Private Helper Method (`calculateTotal`)
