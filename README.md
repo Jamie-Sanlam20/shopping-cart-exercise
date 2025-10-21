@@ -6,7 +6,7 @@ This implementation improves the original shopping cart code by enhancing **read
 ---
 
 ## Approach
-After reviewing the exercise instructions, I examined the code for any redundant or repititive logic that could be removed or refactored without changing the main functionality. I specifically looked for areas where the code violated the DRY (Don't Repeat Yourself) principle.
+After reviewing the exercise instructions, I examined the code for any redundant or repetitive logic that could be removed or refactored without changing the main functionality. I specifically looked for areas where the code violated the DRY (Don't Repeat Yourself) principle.
 
 ### Issues Found
 1. The BigDecimal import was unused, which could confuse developers working on the codebase.
